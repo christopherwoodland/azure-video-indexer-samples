@@ -63,30 +63,30 @@ namespace CarDetectorApp
                 return string.Empty;
             }
 
-            var carFrameData = videoInsights.Videos
-                .Select(v => v.Insights)
-                .SelectMany(insight => insight.DetectedObjects)
-                .Where(dto => dto.Type.Equals(DetectObjectType))
-                .Select(dto=> new FrameData(dto.Id.ToString(), 1,
-                    VideoIndexerClient.GetThumbnailRequestUri(videoId, dto.ThumbnailId),dto.TimePairs))
-                .ToList();
+            //var carFrameData = videoInsights.Videos
+            //    .Select(v => v.Insights)
+            //    .SelectMany(insight => insight.DetectedObjects)
+            //    .Where(dto => dto.Type.Equals(DetectObjectType))
+            //    .Select(dto=> new FrameData(dto.Id.ToString(), 1,
+            //        VideoIndexerClient.GetThumbnailRequestUri(videoId, dto.ThumbnailId),dto.TimePairs))
+            //    .ToList();
 
-            if (!carFrameData.Any())
-            {
-                _logger.LogInformation("No Cars Detected on VideoId: {0}", videoId);
-                return string.Empty;
-            }
+            //if (!carFrameData.Any())
+            //{
+            //    _logger.LogInformation("No Cars Detected on VideoId: {0}", videoId);
+            //    return string.Empty;
+            //}
 
-            //Step 2 : Send Each Thumbnail to Florence Model
-            _logger.LogInformation("Processing Florence Started on VideoId: {0}, Operation: {1}", videoId, operationName);
-            var customInsights = await _cognitiveVisionClient.ExtractCustomInsights(carFrameData);
-            _logger.LogInformation("Processing Florence Completed on VideoId: {0}, Operation: {1}", videoId, operationName);
+            ////Step 2 : Send Each Thumbnail to Florence Model
+            //_logger.LogInformation("Processing Florence Started on VideoId: {0}, Operation: {1}", videoId, operationName);
+            //var customInsights = await _cognitiveVisionClient.ExtractCustomInsights(carFrameData);
+            //_logger.LogInformation("Processing Florence Completed on VideoId: {0}, Operation: {1}", videoId, operationName);
 
-            // postprocessing for insights 
-            _logger.LogInformation("Calling Path Index on Video Indexer API -Started");
-            var pathResultCode = await VideoIndexerClient.PatchIndex(videoId, customInsights, videoInsights.HasCustomInsights);
-            _logger.LogInformation("Calling Path Index on Video Indexer API -Completed. ResultCode: {0}", pathResultCode);
-            return pathResultCode;
+            //// postprocessing for insights 
+            //_logger.LogInformation("Calling Path Index on Video Indexer API -Started");
+            //var pathResultCode = await VideoIndexerClient.PatchIndex(videoId, customInsights, videoInsights.HasCustomInsights);
+            //_logger.LogInformation("Calling Path Index on Video Indexer API -Completed. ResultCode: {0}", pathResultCode);
+            return "";
         }
 
         private static IndexEvent ToIndexEvet(EventData evt) => JsonConvert.DeserializeObject<IndexEvent>(evt.EventBody.ToString());

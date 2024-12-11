@@ -1,6 +1,4 @@
-﻿using System.Collections.Concurrent;
-
-namespace VideoIndexerClient.Utils
+﻿namespace VideoIndexerClient.Utils
 {
     public static class LinqUtils
     {

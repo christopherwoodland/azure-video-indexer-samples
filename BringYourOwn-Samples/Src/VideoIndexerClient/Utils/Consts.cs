@@ -4,8 +4,9 @@ namespace VideoIndexerClient.Utils
 {
     public static class Consts
     {
+        public const int MAX_THREADS = 6;
         public const string AzureResourceManager = "https://management.azure.com";
-        public const string ApiVersion = "2022-08-01";
+        public const string ApiVersion = "2024-01-01";
 
         public static readonly string SubscriptionId = Environment.GetEnvironmentVariable("SUBSCIPTION_ID") ;
         public static readonly string ResourceGroup = Environment.GetEnvironmentVariable("VI_RESOURCE_GROUP") ;

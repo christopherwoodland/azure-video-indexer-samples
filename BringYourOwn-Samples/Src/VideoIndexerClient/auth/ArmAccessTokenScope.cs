@@ -1,9 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace VideoIndexerClient.auth
+﻿namespace VideoIndexerClient.auth
 {
 
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ArmAccessTokenPermission
     {
         Reader,
@@ -12,7 +10,7 @@ namespace VideoIndexerClient.auth
         Owner,
     }
 
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ArmAccessTokenScope
     {
         Account,

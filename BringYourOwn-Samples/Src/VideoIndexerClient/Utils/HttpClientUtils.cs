@@ -1,4 +1,4 @@
-﻿using System.Web;
+﻿
 #pragma warning disable CS8603 // Possible null reference return.
 
 namespace VideoIndexerClient.Utils

@@ -1,11 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System.Text.Json;
-using Azure.Core;
-using Azure.Identity;
-using Microsoft.Extensions.Logging;
-using static VideoIndexerClient.Utils.Consts;
-
-namespace VideoIndexerClient.auth
+﻿namespace VideoIndexerClient.auth
 {
 
     public static class AccountTokenProvider
@@ -34,7 +27,7 @@ namespace VideoIndexerClient.auth
 
             try
             {
-                var jsonRequestBody = JsonSerializer.Serialize(accessTokenRequest);
+                var jsonRequestBody = System.Text.Json.JsonSerializer.Serialize(accessTokenRequest);
                 logger.LogInformation("Getting Account access token: {0}",jsonRequestBody);
                 var httpContent = new StringContent(jsonRequestBody, System.Text.Encoding.UTF8, "application/json");
 
@@ -47,7 +40,7 @@ namespace VideoIndexerClient.auth
                 result.EnsureSuccessStatusCode();
                 var jsonResponseBody = await result.Content.ReadAsStringAsync(ct);
                 logger.LogInformation("Got Account access token: {0},{1}",scope,permission);
-                return JsonSerializer.Deserialize<GenerateAccessTokenResponse>(jsonResponseBody)?.AccessToken!;
+                return System.Text.Json.JsonSerializer.Deserialize<GenerateAccessTokenResponse>(jsonResponseBody)?.AccessToken!;
             }
             catch (Exception ex)
             {
